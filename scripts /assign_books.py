@@ -26,12 +26,19 @@ def distribute_books(users, books):
     return user_books
 
 def create_result_json(users, user_books):
-    """Создает итоговый JSON-файл."""
+    """Создает итоговый JSON-файл с нужными полями."""
     result = []
     for i, user in enumerate(users):
-        user["books"] = user_books[i]
-        result.append(user)
+        filtered_user = {
+            "name": user.get("name"),
+            "gender": user.get("gender"),
+            "address": user.get("address"),
+            "age": user.get("age"),
+            "books": user_books[i]
+        }
+        result.append(filtered_user)
     return result
+
 
 def main():
     users = load_users("/home/admin1/Otus/users.json")
